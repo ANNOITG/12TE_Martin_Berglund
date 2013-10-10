@@ -1,0 +1,43 @@
+body {
+    background-color: #808080;
+    background-image: url("myännujättenyarebg.jpg");
+    background-size: contain;
+}
+
+.klass1
+{
+    width: 1300px;
+    height: 45px;
+}
+
+#id7 
+{
+    margin-left: 13px;
+    margin-top:  200px; //<--- gör ingenting
+}
+#id1
+{
+    font-size: 32px;
+    margin-top: 55px;
+}
+
+#id2
+{
+    margin-top: 300px;
+}
+
+#id3
+{
+    margin-top: -316px;
+    margin-left: 400px;
+}
+
+#id4 
+{
+    margin-left: 400px;
+}
+
+*{
+    box-shadow: 0 0 10px green;
+}
+
