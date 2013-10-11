@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "metoder - 11.4 moms del1", "metoder - 11.4 moms del1\metoder - 11.4 moms del1.csproj", "{4DDC4065-1B7D-43CF-BB4A-BB12D09C1BAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4DDC4065-1B7D-43CF-BB4A-BB12D09C1BAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DDC4065-1B7D-43CF-BB4A-BB12D09C1BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DDC4065-1B7D-43CF-BB4A-BB12D09C1BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DDC4065-1B7D-43CF-BB4A-BB12D09C1BAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
