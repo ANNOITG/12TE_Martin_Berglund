@@ -1,0 +1,46 @@
+body {
+    background-image: url("bg.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.wrapper
+{
+    margin: 0 auto;
+    width: 80%;
+    min-height: 60px;
+    position: relative;
+    
+    
+}
+
+.menyWrapper 
+{
+    min-height: 100px;
+    position:  relative;
+    margin:  0 auto;
+    background-color: rgba(255, 255, 255, 0.39);
+}
+
+.menyWrapeer ul {
+    padding: 0;
+    list-style: none;
+    color:  white;
+}
+
+.menyWrapper ul li {
+    display:  inline-block;
+    height: 100px ;
+    color: white;
+    padding: ;
+    border-radius: ;
+    width: ;
+    font-size: ;
+    text-align: ;
+}
+
+.contentWrapper
+{
+    background-color: rgba(255, 255, 255, 0.39);
+    min-height: 500px;
+}
