@@ -1,0 +1,117 @@
+﻿@{
+    var db = Database.Open("StarterSite");
+    var Products = db.QuerySingle("SELECT * FROM Products WHERE Id = " + Request["Id"]);
+
+    WebImage photo = null; <!--kommentar finns i addimgprod.cshtml-->
+    var newFileName = "";
+    var imagePath = "";
+    var imageThumbPath = "";
+    var Namn = "";
+    var Type = "";
+    var prisKg = "";
+    var Bieffekter = "";
+    var Lagerstatus = "";
+    var Utkorning = "";
+
+    Validation.RequireField("Namn"); <!--kommentar finns i addimgprod.cshtml-->
+    Validation.RequireField("Type");
+    Validation.RequireField("prisKg");
+    Validation.RequireField("Bieffekter");
+    Validation.RequireField("Lagerstatus");
+    Validation.RequireField("Utkorning");
+    /*Validation.Add("Price", Validator.Integer("Must be an integer");
+    Validation.Add("Stock", Validator.Integer("Must be an integer");*/
+    
+    if(IsPost && Validation.IsValid())
+    {
+        photo = WebImage.GetImageFromRequest(Request.Form["Image"]);
+        if(photo != null)
+        {
+            var fullpathThumb = Server.MapPath(Products.ThumbImg);
+            var fullPathImage = Server.MapPath(Products.ImagePath);
+            
+            if (File.Exists(fullPathImage))
+            {
+                File.Delete(fullPathImage); <!--Här tas gamla värdet bort-->
+            }
+
+            if (File.Exists(fullpathThumb))
+            {
+                File.Delete(fullpathThumb); <!--Samma som ovan-->
+            }
+            
+            
+                newFileName = Guid.NewGuid().ToString() + "_" +
+                    Path.GetFileName(photo.FileName);
+            
+                imagePath = @"ManageProducts/ProdImg/" + newFileName;
+                photo.Save(@"~/" + imagePath);
+            
+                imageThumbPath = @"ManageProducts/ProdImg/thumb/" + newFileName;
+                photo.Resize(width: 60, height: 60, preserveAspectRatio: true,
+                    preventEnlarge: true);
+                photo.Save(@"~/" + imageThumbPath);
+        }
+        else
+        {
+            imagePath = Products.ImagePath;
+            imageThumbPath = Products.ThumbImg;
+        }
+        
+        Namn = Request.Form["Namn"];
+        Type = Request.Form["Type"];
+        prisKg = Request.Form["prisKg"];
+        Bieffekter = Request.Form["Bieffekter"];
+        Lagerstatus = Request.Form["Lagerstatus"];
+        Utkorning = Request.Form["Utkorning"];
+
+        var updateCommand = "UPDATE Products SET Namn=@0, Image=@1, ImageThumb=@2, Type=@3, prisKg=@4, Bieffekter=@5, Lagerstatus=@6, Utkorning@=7, WHERE" +
+            "ProductId = " + Request["Id"]; <!--Insättning av nya värden-->
+        db.Execute(updateCommand, Namn, imagePath, imageThumbPath, Type, prisKg, Bieffekter, Lagerstatus, Utkorning);
+        Response.Redirect("~/");
+        
+    }
+}
+
+<form method="post" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Edit Product</legend>
+
+        <p>
+            <label for="Namn">Namn</label>
+            <input type="text" name="Namn" value="@(IsPost ? Request.Form["Namn"] : Products.Namn)" /> <!--Användare lägger till ny information-->
+        </p>
+        
+        <p>
+            <label for="Image"></label>
+            <input type="file" name="Image" value="@(IsPost ? Request.Form["Image"] : Products.Image)" /> <!--Användare lägger till nya bild (DEN FUNGERAR INTE AV NÅGON ANLEDNING)-->
+        </p>
+
+        <p>
+            <label for="Type">Type</label>
+            <input type="text" name="Type" value="@(IsPost ? Request.Form["Type"] : Products.Type)" />
+        </p>
+
+        <p>
+            <label for="prisKg">Pris/kg</label>
+            <input type="text" name="prisKg" value="@(IsPost ? Request.Form["prisKg"] : Products[3])" />
+        </p>
+
+        <p>
+            <label for="Bieffekter">Bieffekter</label>
+            <input type="text" name="Bieffekter" value="@(IsPost ? Request.Form["Bieffekter"] : Products.Bieffekter)" />
+        </p>
+
+        <p>
+            <label for="Lagerstatus">Lagerstatus</label>
+            <input type="text" name="Lagerstatus" value="@(IsPost ? Request.Form["Lagerstatus"] : Products.Lagerstatus)" />
+        </p>
+
+        <p>
+            <label for="Utkorning">Utkörning?</label>
+            <input type="text" name="Utkorning" value="@(IsPost ? Request.Form["Utkorning"] : Products[6])" />
+        </p>
+
+        <input type="submit" value="Submit" />    
+    </fieldset>
+</form>

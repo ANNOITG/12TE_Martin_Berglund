@@ -1,0 +1,39 @@
+﻿<h1>Din kundvagn innehåller</h1>
+@{
+    var theKey = WebSecurity.CurrentUserId.ToString();
+
+    IList<int> Kundvagn = (List<int>)WebCache.Get(theKey);
+
+    if (Kundvagn == null || Kundvagn.Count == 0)
+    {
+        <p>Kundvagnen innehåller ingen cannabis</p>
+
+    }
+    else
+    { 
+    var db = Database.Open("StarterSite");
+    var queryString = "Select * from products where ";
+    for (int i = 0; i < Kundvagn.Count; i++)
+    {
+        queryString += "Id = " + Kundvagn[i];
+
+        if ((i + 1) != Kundvagn.Count)
+        {
+            queryString += " or ";
+        }
+    }
+
+    var produkter = db.Query(queryString);
+    
+    foreach(var vara in produkter)
+    {
+        <div class="vagnVara">
+            <p>@vara.Namn | @vara[3] | <img src="@Href(vara.ImageThumb)" /> </p>
+        </div>
+    }
+
+  }
+    
+}
+
+<a href="@Href("~/cash")">>> Gå till kassan</a>

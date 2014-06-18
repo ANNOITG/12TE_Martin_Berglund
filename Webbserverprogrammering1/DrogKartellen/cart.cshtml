@@ -1,0 +1,44 @@
+﻿@{
+    var theKey = WebSecurity.CurrentUserId.ToString();
+    
+    IList<int> kundvagn = (List<int>)WebCache.Get(theKey); <!--produkten anropas i databasen-->
+    
+    var cacheHit = true;
+    
+    if (kundvagn == null)
+    {
+        kundvagn = new List<int>();
+        
+        kundvagn.Add(Request["Id"].AsInt());
+        
+        WebCache.Set(theKey, kundvagn); <!--produkten hämtas ur databasen-->
+            
+    }
+    else
+    {
+        kundvagn.Add(Request["Id"].AsInt()); 
+    }
+    
+    var db = Database.Open("StarterSite");
+    var queryString = "Select * from Products Where ";
+    
+    for (int i = 0; i < kundvagn.Count; i++)
+    {
+        queryString += "Id = " + kundvagn[i];
+        
+        if( (i + 1) != kundvagn.Count)
+        {
+            queryString += " or ";
+        }
+    }
+        var produkter = db.Query(queryString);
+        
+        foreach(var vara in produkter)
+        {
+            <div class="vagnVara">
+                <p>@vara.Namn | @vara.[3] | <img src= "@Href(vara.ImageThumb)" /> </p> <!--användaren ser här namnet på produkten som lagts til i kundvagnen-->
+            </div>
+        }
+
+    
+}

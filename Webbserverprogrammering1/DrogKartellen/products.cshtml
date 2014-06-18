@@ -1,0 +1,50 @@
+﻿@{
+    var db = Database.Open("StarterSite"); <!--Alla produkter hämtas ur databasen-->
+    var selectQueryString = "SELECT * FROM Products order by [Pris/kg]";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Produkter
+    </title>
+</head>
+<body>
+    <h1>Alla rökbara produkter</h1>
+    <div class="prods">
+    @foreach (var row in db.Query(selectQueryString))
+    {
+        <div class="eachprod">
+            <p>Namn:<br />@row.Namn</p>
+            <p>Type:<br />@row.Type</p>
+            <p>Pris/kg:<br />@row[3]</p>
+            <p>Bieffekter:<br />@row.Bieffekter</p>
+            <p>Lagerstatus:<br />@row.Lagerstatus</p>
+            <p>Utkörning?<br />@row[6]</p>
+            <div class="buy"><p><a onclick="link(@row.Id)" href="#">Köp 10 gram</a></p></div>
+            <p><img alt="Image not found" src="@row.ImageThumb" /></p>
+            <p><a href= "@Href("~/editprod?ID=" + @row.Id)">Ändra Produkten</a></p><!--Länk för att Ändra produkten-->
+
+        </div>
+    }
+    </div>
+
+
+    <div class="prodLink">
+        <p><a href="@Href("~/Addimgprod.cshtml")">Lägg till en produkt</a></p> <!--Länk för att lägga till en produkt-->
+        <p><a href="@Href("~/displaycart.cshtml")">Gå till kundvagn</a></p><!--Länk för att lägga till produkten i kundvagnen-->
+    </div>
+
+    <script>
+
+        function link(identity)
+        {
+            $.get("cart.cshtml", { Id : identity}).success(function() { 
+                alert("Tillagd i din kundvagn"); //* när något lagts till i kundvagnen så kommer en liten ruta upp som uppmärksammar det *//
+            });
+        }
+
+    </script>
+</body>
+</html>

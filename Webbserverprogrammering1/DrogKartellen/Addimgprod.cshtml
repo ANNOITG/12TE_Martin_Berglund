@@ -1,0 +1,116 @@
+﻿@{
+    WebImage photo = null; <!--Variablerna till databasen-->
+    var newFileName = "";
+    var imagePath = "";
+    var imageThumbPath = "";
+    var Namn = "";
+    var Type = "";
+    var prisKg = "";
+    var Bieffekter = "";
+    var Lagerstatus = "";
+    var Utkorning = "";
+
+    Validation.Add("Pris/kg", Validator.Integer("Must be an integer")); <!--Här anropas variablerna (tror jag)-->
+    Validation.Add("Lagerstatus", Validator.Integer("Must be an integer"));
+    Validation.RequireField("Namn","Produktens namn krävs");
+    Validation.RequireField("Type","Produktens type krävs");
+    Validation.RequireField("Pris/kg","Produktens pris/kg krävs");
+    Validation.RequireField("Bieffekter","Produktens bieffekter krävs");
+    Validation.RequireField("Lagerstatus","Produktens lagerstatus krävs");
+    Validation.RequireField("Utkörning?","Om produkten kan köras ut av dig, krävs");
+
+    /*var db = Database.Open("Startersite");
+    var namn = Request.Form["Namn"];
+    var type = Request.Form["Type"];
+    var pris_x002f_kg = Request.Form["Pris/kg"];
+    var bieffekter = Request.Form["Bieffekter"];
+    var lagerstatus = Request.Form["Lagerstatus"];
+    var utkörning_x003f_ = Request.Form["Utkörning?"];*/
+
+    if (IsPost && Validation.IsValid()) <!--När en produkt ska läggas till-->
+    {
+            photo = WebImage.GetImageFromRequest(Request.Form["Image"]);
+            if (photo != null && Validation.IsValid())
+            {
+                newFileName = Guid.NewGuid().ToString() + "_" +
+                Path.GetFileName(photo.FileName);
+
+                imagePath = @"ManageProducts/ProdImg/" + newFileName;
+                photo.Save(@"~/" + imagePath);
+
+                imageThumbPath = @"ManageProducts/ProdImg/thumb/" + newFileName;
+                photo.Resize(width: 60, height: 60, preserveAspectRatio: true,
+                    preventEnlarge: true);
+                photo.Save(@"~/" + imageThumbPath);
+
+                Namn = Request.Form["Namn"]; <!--Variabel värden för den nya produkten-->
+                Type = Request.Form["Type"];
+                prisKg = Request.Form["Pris/kg"];
+                Bieffekter = Request.Form["Bieffekter"];
+                Lagerstatus = Request.Form["Lagerstatus"];
+                Utkorning = Request.Form["Utkörning?"];
+
+                var db = Database.Open("StarterSite"); <!--insättning av värden-->
+                var insertCommand = "INSERT INTO Products (Namn, Type, [Pris/kg], Bieffekter, Lagerstatus, [Utkörning?], Image, ImageThumb)" +
+                    "VALUES(@0, @1, @2, @3, @4, @5, @6, @7, @8)";
+                db.Execute(insertCommand, Namn, Type, prisKg, Bieffekter, Lagerstatus, Utkorning, imagePath, imageThumbPath);
+                Response.Redirect("~/ManageProduct/ProductList.cshtml");
+
+
+            }
+
+        }
+    
+}
+
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Lägg till Produkt</title>
+    </head>
+    <body>
+        <h1>Lägg till en produkt att sälja</h1>
+        <form method="post" action="">
+            <fieldset>
+                <legend>Lägg till Produkt</legend>
+                <div>
+                    <label>Namn</label>
+                    <input name="Namn" type="text" size="50" value="@Namn" /> <!--Här fyller man i värden för prod på själva sidan-->
+                </div>
+                <div>
+                    <label>Type</label>
+                    <input name="Type" type="text" size="50" value="@Type" />
+                </div>
+                <div>
+                    <label>Pris/kg</label>
+                    <input name="Pris/kg" type="text" size="50" value="@prisKg" />
+                </div>
+                <div>
+                    <label>Bieffekter</label>
+                    <input name="Bieffekter" type="text" size="50" value="@Bieffekter" />
+                </div>
+                <div>
+                    <label>Lagerstatus:</label>
+                    <input name="Lagerstatus" type="text" size="50" value="@Lagerstatus" />
+                </div>
+                <div>
+                    <label>Utkörning?</label>
+                    <input name="Utkörning?" type="text" size="50" value="@Utkorning" />
+                </div>
+                <div>
+                    <input type="file" name="Image" /> <!--Här läggar man till en bild för produkten-->
+                </div>
+                <div>
+                    <label>&nbsp;</label>
+                    <input type="submit" value="Lägg till" class="submit" />
+                </div>
+                
+            </fieldset>
+        </form>
+        @if (IsPost && !Validation.IsValid())
+        {
+            <p>@Html.ValidationSummary("Fel med ditt bidrag:")</p>
+        }
+    </body>
+</html>

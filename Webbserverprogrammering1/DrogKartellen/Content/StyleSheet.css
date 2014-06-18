@@ -1,0 +1,329 @@
+﻿.opa
+{
+    background-size: 65%;
+    background-color: rgba(240, 255, 240, 0.80);
+    min-height: 700px;
+    min-width: 550px;
+    padding: 100px;
+    padding-left: 180px;
+
+}
+
+body {
+    background-image: url(../drogkartellproject.jpg);
+    background-size: 65%;
+    background-repeat: no-repeat;
+    background-position-y: 170px;
+    background-position-x: 230px;
+    background-color: white;
+    padding: 0;
+    margin: 0;
+}
+
+ /**
+{
+    border: 1px solid #01580b;
+}*/
+
+
+.leftie
+{
+    background-image: url(../cannabis1.jpg);
+    background-size: 800%;
+    float: left;
+    width: 12%;
+    min-height: 800px;
+    display: inline;
+
+    
+    //#01580b rgba(1, 125, 0, 0.90)
+
+}
+
+.leftie ul
+{
+    margin-left: 13px;
+    list-style: none;
+    padding: 0;
+    margin-top: 50px;
+}
+
+.leftie ul li a
+{
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    margin-left: 5px;
+    
+}
+
+.leftie ul li
+{
+    width: 110px;
+    margin: 5px;
+    background-color: rgba(10, 10, 10, 0.80);
+}
+
+.leftie ul li:hover
+{
+    background-color: rgba(0, 0, 0, 1);
+}
+
+.meny
+{
+    background-color: rgba(14, 24, 14, 0.96);
+    float: left;
+    width: 100%;
+    height: 115px;
+    margin-top: -10px;
+}
+
+.meny ul
+{
+    margin-left: 600px;
+    list-style: none;
+    padding: 0;
+    display: inline;
+    width: 66px;
+}
+
+.meny ul li:hover
+{
+    background-color: rgba(10, 35, 10, 1);
+}
+
+.meny ul li
+{
+    display: inline-block;
+    padding: 6px;
+    border: 2px solid #01760e;
+    border-radius: 10px;
+    width: 100px;
+    background-color: black;
+}
+
+.meny ul li a
+{
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+ 
+#login
+{
+    right: 0px;
+    position: absolute;
+    width: 500px;
+    top: 40px;
+}
+
+.reglog
+{
+    font-size: 20px;
+}
+
+.gtfo
+{
+    right: 100px;
+    position: absolute;
+
+}
+
+#service
+{
+    margin-top: 5px;
+    margin-left: 250px;
+}
+
+#pay
+{
+    margin-left: 30px;
+}
+
+.righty
+{
+    float: right;
+    background-image: url(../cannabis1.jpg);
+    background-size: 800%;
+    width: 12%;
+    min-height: 800px;
+    display: inline;
+    
+}
+
+.logo img
+{
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 200px;
+    position: absolute;
+}
+
+.float-right
+{
+    padding-top: 30px;
+}
+
+.prodLink
+{
+    margin-top: 20px;
+    height: 30px;
+    width: 500px;
+}
+
+.prodLink p
+{
+    padding: 4px;
+    margin: 4px;
+    background-color: black;
+    border-radius: 5px;
+    display: inline;
+    border: 4px solid #01760e;
+    border-radius: 5px;
+}
+
+.prodLink p a
+{
+    text-decoration: none;
+    color: white;
+    margin: 0 auto;
+}
+
+.prodLink :hover
+{
+    background-color: rgba(10, 35, 10, 1);
+}
+
+.buy
+{
+    background-color: black;
+    border-radius: 2px;
+    display: inline-block;
+    float: right;
+    border: 2px solid #01760e;
+    height: 40px;
+    margin-top: 20px;
+    margin-right: 14px;
+}
+
+.buy p
+{
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.buy p a
+{
+    text-decoration: none;
+    color: white;
+}
+
+.buy:hover
+{
+    background-color: rgba(10, 35, 10, 1);
+}
+
+
+.gtfo form:hover, .gtfo > a:hover
+{
+    background-color: rgba(10, 35, 10, 1);
+}
+
+.gtfo form, .gtfo > a
+{
+    display: inline-block;
+    width: 150px;
+    border: 2px solid #01760e;
+    border-radius: 10px;
+    background-color: black;
+    padding: 5px;
+}
+
+.gtfo a
+{   
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.gtfo form 
+{
+    position: relative;
+    top: -20px;
+}
+
+.eachprod
+{
+    height: 118px;
+    width: 997px;
+    border: 3px solid #01760e;
+}
+
+.eachprod > p
+{
+    display: inline-block;
+    padding: 3px;
+}
+
+.welcome
+{
+    margin-top: -10px;
+    margin-left: 10px;
+}
+
+.welcome h1
+{
+    font-size: 50px;
+    font-family: ;
+    text-decoration: underline;
+    color: #01760e;   
+}
+
+.bx-wrapper
+{
+    float: left;
+    width: 290px;
+}
+
+.buythese
+{
+    position: absolute;
+    margin-left: 350px;
+    margin-top: 50px;
+}
+
+label 
+{
+    float: left;
+    width: 8em;
+    text-align: right;
+    margin-right: 0.5em;
+}
+
+fieldset 
+{
+    padding: 1em;
+    border: 1px solid;
+    width: 50em;
+}
+
+legend 
+{
+    padding: 2px 4px;
+    border: 1px solid;
+    font-weight: bold;
+}
+
+.validation-summary-errors 
+{
+    font-weight: bold;
+    color: red;
+    font-size: 11pt;
+}
+
+table, th, td 
+{
+    border: solid 1px #ffd800;
+    border-collapse: collapse;
+    padding: 2px;
+}

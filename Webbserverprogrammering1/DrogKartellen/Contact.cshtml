@@ -1,0 +1,35 @@
+﻿@{
+    Page.Title = "Kundtjänst";
+
+    if(IsPost)
+    {
+        var name = Request.Form["name"]; <!--variabel för diverse rader skapas-->
+        var email = Request.Form["email"];
+        var question = Request.Form["question"];
+
+        <div id="formData">
+
+            Steroid-IDs: @name <br />
+            E-mail: @email <br />
+            Fråga: @question <br />
+
+        </div>
+    }
+    else
+    {
+    <form method="post">
+        <h1>Fråga gärna om du har bekymmer med någonting</h1>
+        <h2>(risken är dock liten att du får svar)</h2>
+        Namn: <br />
+        <input type="text" name="name" /> <br />
+        E-mail: <br />
+        <input type="email" name="email" /> <br />
+        Fråga:<br />
+        <textarea name="question"></textarea> <br />
+        <input type="submit" value="Send" />
+        <h3>Ring helst för lättare service</h3>
+        <p>Telefon: +46 019 666666</p>
+    </form>
+    }
+}
+

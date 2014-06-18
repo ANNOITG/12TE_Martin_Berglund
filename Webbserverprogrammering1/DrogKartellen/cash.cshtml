@@ -1,0 +1,112 @@
+﻿<h1>Pay up BITCH</h1>
+@{
+    var theKey = WebSecurity.CurrentUserId.ToString();
+
+    IList<int> kassa = (List<int>)WebCache.Get(theKey); <!--produkten hämtas ur databasen-->
+    
+    <!--Om kundvagnen är tom sker följande-->
+    if (kassa == null || kassa.Count == 0) 
+    {
+        <p>Kundvagnen innehåller ingen cannabis</p>
+
+    }
+    else
+    { 
+    var db = Database.Open("StarterSite");
+    var queryString = "Select * from products where ";
+    for (int i = 0; i < kassa.Count; i++)
+    {
+        queryString += "Id = " + kassa[i];
+        
+        if ( (i + 1) != kassa.Count)
+        {
+            queryString += " or ";
+        }
+    }
+
+    var produkter = db.Query(queryString);
+    
+    foreach(var vara in produkter)
+    {
+        <div class="vagnVara">
+            <p>@vara.Namn | @vara.[3] | <img src="@Href(vara.ImageThumb)" /> </p>
+        </div>
+    }
+
+  }
+  
+}
+
+<html>
+<head>
+    <title>Betala</title>
+    <style type="text/css">
+        label {
+            float: left;
+            width: 8em;
+            text-align: right;
+            margin-right: 0.5em;
+        }
+
+        fieldset {
+            padding: 1em;
+            border: 1px solid;
+            width: 50em;
+        }
+
+        legend {
+            padding: 2px 4px;
+            border: 1px solid;
+            font-weight: bold;
+        }
+
+        .validation-summary-errors {
+            font-weight: bold;
+            color: red;
+            font-size: 11pt;
+        }
+    </style>
+</head>
+<body>
+    <h1>Betala</h1>
+    <form method="post" action="">
+        <fieldset>
+            <legend>Information</legend>
+            <div>
+                <label>Konto-nummer</label>
+                <input name="Namn" type="text" size="50"/>
+            </div>
+            <div>
+                <label>Kort typ</label>
+                <input name="Type" type="text" size="50"/>
+            </div>
+            <div>
+                <label>För och efternamn</label>
+                <input name="Pris/kg" type="text" size="50"/>
+            </div>
+            <div>
+                <label>Leveransadress</label>
+                <input name="Bieffekter" type="text" size="50"/>
+            </div>
+            <div>
+                <label>Ort/stad</label>
+                <input name="Lagerstatus" type="text" size="50"/>
+            </div>
+            <div>
+                <label>e-postadress</label>
+                <input name="Utkörning?" type="text" size="50" />
+            </div>
+            <div>
+                <label>&nbsp;</label>
+                <input type="submit" value="Beställ" class="submit"/>
+            </div>
+
+        </fieldset>
+    </form>
+    @if (IsPost && !Validation.IsValid())
+    {
+        <p>Fel kort information</p>
+    }
+
+</body>
+</html>

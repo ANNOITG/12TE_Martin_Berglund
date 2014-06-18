@@ -1,0 +1,90 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@Page.Title - My ASP.NET Web Page</title>
+        <link href="~/Content/themes/base/jquery.ui.all.css" rel="StyleSheet" type="text/css" />
+        <link href="~/Content/StyleSheet.css" rel="StyleSheet" type="text/css" />
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+        <script src="~/Scripts/jquery-ui-1.10.3.js"></script>
+        <script src="~/Scripts/modernizr-2.6.2.js"></script>
+        <meta name="viewport" content="width=device-width" />
+        
+        <link href="~/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+        <script src="~/jquery.bxslider/jquery.bxslider.min.js"></script>
+        <script src="~/Scripts/MyScript.js"></script>
+    </head>
+    <body>
+
+        <div class="meny">
+            <!--MENYN börjar här------------------------------------------------------------------------->
+            <div class="logo">
+                <p class="site-title"><a href="@Href("~/Index")"><img src="../logocannabis.jpg" /></a></p>
+            </div>
+            <div class="float-right">
+                
+
+                    <ul id="service">
+                        <li><a href="@Href("~/Index")">Hem</a></li>
+                        <li><a href="@Href("~/About")">Om</a></li>
+                        <li><a href="@Href("~/Contact")">Kundtjänst</a></li>
+                    </ul>
+
+                    <ul id="pay">
+                        <li><a href="@Href("~/displaycart")">Din kundvagn</a></li>
+                        <li><a href="@Href("~/cash")">Gå till kassan</a></li>
+                    </ul>
+
+                    <section id="login">
+                        @if (WebSecurity.IsAuthenticated)
+                        {
+                            <div class="gtfo">
+                                <a class="email" href="~/Account/Manage" title="Manage">@WebSecurity.CurrentUserName</a>
+                                <form id="logoutForm" action="~/Account/Logout" method="post">
+                                    @AntiForgery.GetHtml()
+                                    <a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
+                                </form>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="gtfo">
+                                <a href="~/Account/Register">Skapa konto</a>
+                                <a href="~/Account/Login">Logga in</a>
+                            </div>
+                        }
+
+
+
+                    </section>
+            </div>
+        </div><!--MENYN SLUTAR HÄR------------------------------------------------------------------>
+        <div class="leftie">
+            <!--Vänster spalten börjar här---------------------------------------------------------->
+            <ul>
+                <li><a href="@Href("~/products")">Rökbart</a></li>
+                <li><a href="@Href("~/preownd")">Begagnat</a></li>
+                <li><a href="~/">Jointpapper</a></li>
+                <li><a href="~/">Tillbehör</a></li>
+                <li><a href="~/">Övrigt</a></li>
+            </ul>
+        </div>
+        <!--Vänster spalten slutar här/ Höger spalten börjar här-------------------------------------------------------------->
+        <div class="righty">
+
+        </div>
+        <!--Höger spalten slutar här-->
+            
+        <div class="opa"><!--Det här är en vit opacity som ligger ovanför bakgrunden-->
+                @*RenderSection("featured", required: false)*@
+                    @RenderBody()
+            </div>
+        @RenderSection("Scripts", required: false)
+
+
+        
+    </body>
+</html>
